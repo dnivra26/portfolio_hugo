@@ -1,17 +1,27 @@
-language: node_js
-jobs:
-  include:
-    - stage: deploy
-      script:
-        - REPO=dnivra26.github.io
-        - rm -rf ${REPO}
-        - git clone git://github.com/dnivra26/${REPO}.git
-        - rm -r ${REPO}/*
-        - cp -r public/* ${REPO}/
-        - cd ${REPO}
-        - git config user.email ${email_id}
-        - git config user.name dnivra26
-        - git add .
-        - echo ${TRAVIS_COMMIT}
-        - git commit -m ${TRAVIS_COMMIT}
-        - git push "https://${github_token}@github.com/dnivra26/${REPO}.git" master
+# Install the apt prerequisites
+language: python
+
+python:
+    - "3.6"
+
+install:
+    - wget https://github.com/gohugoio/hugo/releases/download/v0.50/hugo_0.50_Linux-32bit.deb
+    - sudo dpkg -i hugo*.deb
+    - pip install Pygments
+    - rm -rf public 2> /dev/null
+
+# Build the website
+script:
+  - hugo --theme=coder
+  - REPO=dnivra26.github.io
+  - rm -rf ${REPO}
+  - git clone git://github.com/dnivra26/${REPO}.git
+  - rm -r ${REPO}/*
+  - cp -r public/* ${REPO}/
+  - cd ${REPO}
+  - git config user.email ${email_id}
+  - git config user.name dnivra26
+  - git add .
+  - echo ${TRAVIS_COMMIT}
+  - git commit -m ${TRAVIS_COMMIT}
+  - git push "https://${github_token}@github.com/dnivra26/${REPO}.git" master
