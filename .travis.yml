@@ -23,6 +23,6 @@ script:
   - git config user.email ${email_id}
   - git config user.name dnivra26
   - git add .
-  - echo ${TRAVIS_COMMIT}
-  - git commit -m ${TRAVIS_COMMIT}
+  - echo ${TRAVIS_COMMIT_MESSAGE}
+  - git commit -m ${TRAVIS_COMMIT_MESSAGE}
   - git push "https://${github_token}@github.com/dnivra26/${REPO}.git" master

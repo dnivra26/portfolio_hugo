@@ -18,7 +18,7 @@ disqusShortname = "yourdiscussshortname" # Enable or disable Disqus.
 [params] # theme parameters
     author = "Arvind Thangamani" # Author's name.
     info = "Music, Books and may be Computers..." # Author's job title or info.
-    description = "Yusuke Ishimi's personal website" # Site description.
+    description = "Arvind Thangamani's personal website" # Site description.
     keywords = "blog,developer,personal" # Site keywords.
     avatarurl = "images/arvind.jpeg" # Contain the path of the optionnal avatar in the static folder.
 
