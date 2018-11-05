@@ -16,6 +16,7 @@ script:
   - REPO=dnivra26.github.io
   - rm -rf ${REPO}
   - git clone git://github.com/dnivra26/${REPO}.git
+  - echo `ls -ltr`
   - rm -r ${REPO}/*
   - cp -r public/* ${REPO}/
   - cd ${REPO}
