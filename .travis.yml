@@ -1,24 +1,16 @@
-# Install the apt prerequisites
-language: python
+language: ruby
+rvm:
+  - 2.0.0
 
-python:
-    - "3.6"
-
-install:
-    - wget https://github.com/gohugoio/hugo/releases/download/v0.50/hugo_0.50_Linux-32bit.deb
-    - sudo dpkg -i hugo*.deb
-    - pip install Pygments
-    - rm -rf public 2> /dev/null
-
-# Build the website
-script:
-  - hugo --theme=coder
-
-# Deploy to GitHub pages
-deploy:
-  provider: pages
-  skip_cleanup: true
-  local_dir: public
-  github_token: $github_token # Set in travis-ci.org dashboard
-  on:
-    branch: master
+after_success:
+  - REPO=dnivra26.github.io
+  - rm -rf ${REPO}
+  - git clone git://github.com/dnivra26/${REPO}.git
+  - rm -r ${REPO}/*
+  - cp -r public/* ${REPO}/
+  - cd ${REPO}
+  - git config user.email ${email_id}
+  - git config user.name dnivra26
+  - git add .
+  - git commit -m $TRAVIS_COMMIT
+  - git push "https://#{github_token}@github.com/dnivra26/${REPO}.git" master
